@@ -2,5 +2,22 @@
 
 url <- "https://data.cityofnewyork.us/resource/xx67-kt59.json"
 
-#food_data <- read.socrata(url)
-food_data <- readRDS('data/food_data.rda')
+
+#. Need to submit issue re: RSocrata's reading of JSON file
+#token <- 
+#df <- read.socrata(url, app_token = token)
+#write_rds(df, 'data/food_data.Rda')
+df <- read_rds('data/food_data.Rda')
+
+
+#fix column names:
+names(df) <- tolower(names(df))
+names(df) <- make.names(names(df))
+
+
+##date formatting
+df$inspection.date <- mdy(df$inspection.date)
+df$record.date <- mdy(df$record.date)
+df$grade.date <- mdy(df$grade.date)
+
+
