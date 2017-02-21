@@ -21,3 +21,7 @@ df$record.date <- mdy(df$record.date)
 df$grade.date <- mdy(df$grade.date)
 
 
+##Add closed indicator
+df$closed <- ifelse(str_detect(df$action, "Closed"),1,0)
+df$closed <- ifelse(str_detect(df$action, "closed"),1,df$closed)
+df$critical <- ifelse(df$critical.flag=="Critical",1,0)
